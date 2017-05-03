@@ -3,7 +3,7 @@ import { View,StyleSheet, TextInput } from 'react-native';
 
 
 const Edit = (props) => {
-  const { children, onClick,goPost } = props
+  const { deliverEditPost } = props
 
   return (
       <View
@@ -11,10 +11,15 @@ const Edit = (props) => {
           >
           <TextInput
             style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-            onChangeText={(text) => goPost(text)}
+            onChangeText={(text) => deliverEditPost(text)}
           />
       </View>
       )
 }
+
+Edit.propTypes = {
+  deliverEditPost: PropTypes.func.isRequired,
+}
+
 
 export default Edit

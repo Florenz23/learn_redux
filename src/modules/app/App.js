@@ -17,31 +17,31 @@ const renderEdit = (editPost) => {
     return (
       <Edit
         key={"1"}
-        goPost={(newPost) => editPost(newPost)}>
+        deliverEditPost={(newPost) => editPost(newPost)}>
       </Edit>
     )
 }
-const renderPost = (deliverPost) => {
+const renderPost = (recievePost) => {
     return (
       <Post
         key={"2"}>
-        {deliverPost}
+        {recievePost}
       </Post>
     )
 }
 
+
+// alles, was im Connect benötigt wird
 const App = (props) => {
   const {
-    newPost,
-    addNewCounter,
-    deliverPost,
-    editPost
+    recievePost,
+    editPost,
   } = props
 
   return (
     <View style={styles.container}>
         {renderEdit(editPost)}
-        {renderPost(deliverPost)}
+        {renderPost(recievePost)}
     </View>
   )
 }
@@ -52,7 +52,8 @@ App.displayName = 'App'
 //receive. This is really good for documenting and prevent you from a lot of bug during
 //development mode. Remember, all of these will be ignored once you set it to production.
 App.propTypes = {
-  addNewCounter: PropTypes.func.isRequired,
+  recievePost: PropTypes.string.isRequired,
+  editPost: PropTypes.func.isRequired,
 }
 
 //Here's the most complex part of our app. connect is a function which selects,
@@ -62,7 +63,7 @@ App.propTypes = {
 //way to seperate your connect and your pure function.
 export default connect(
   (state) => ({
-    deliverPost: state.app.initialStatePost
+    recievePost: state.app.initialStatePost
   }),
   (dispatch) => ({
     editPost: (dispatchPost) => dispatch(actions.postActionName(dispatchPost)),

@@ -4,7 +4,6 @@ import { View,StyleSheet, TextInput } from 'react-native';
 
 const Post = (props) => {
   const { children } = props
-  console.log(children)
   return (
       <View
           style={{height: 150, width:200}}
@@ -16,6 +15,10 @@ const Post = (props) => {
           </View>
 
       )
+}
+
+Post.propTypes = {
+  children: PropTypes.string.isRequired,
 }
 
 export default Post
