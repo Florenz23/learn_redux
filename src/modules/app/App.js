@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { connect } from 'react-redux'
 
-import { Counters, Counter } from './../../components'
+import { Edit, Post } from './../../components'
 import * as actions from './actions'
 
 const styles = StyleSheet.create({
@@ -13,35 +13,35 @@ const styles = StyleSheet.create({
   }
 })
 
-const renderCounters = (counters, decrement, increment, incrementWithDelay) => {
-  return Object.keys(counters).map((id) => {
-    const value = counters[id]
+const renderEdit = (editPost) => {
     return (
-      <Counter
-        key={id}
-        decrementFn={() => decrement(id)}
-        incrementFn={() => increment(id)}
-        incrementWithDelayFn={() => incrementWithDelay(id)}>
-        {value}
-      </Counter>
+      <Edit
+        key={"1"}
+        goPost={(newPost) => editPost(newPost)}>
+      </Edit>
     )
-  })
+}
+const renderPost = (deliverPost) => {
+    return (
+      <Post
+        key={"2"}>
+        {deliverPost}
+      </Post>
+    )
 }
 
 const App = (props) => {
   const {
+    newPost,
     addNewCounter,
-    counters,
-    decrement,
-    increment,
-    incrementWithDelay
+    deliverPost,
+    editPost
   } = props
 
   return (
     <View style={styles.container}>
-      <Counters addFn={addNewCounter}>
-        {renderCounters(counters, decrement, increment, incrementWithDelay)}
-      </Counters>
+        {renderEdit(editPost)}
+        {renderPost(deliverPost)}
     </View>
   )
 }
@@ -53,10 +53,6 @@ App.displayName = 'App'
 //development mode. Remember, all of these will be ignored once you set it to production.
 App.propTypes = {
   addNewCounter: PropTypes.func.isRequired,
-  counters: PropTypes.object.isRequired,
-  increment: PropTypes.func.isRequired,
-  decrement: PropTypes.func.isRequired,
-  incrementWithDelay: PropTypes.func.isRequired
 }
 
 //Here's the most complex part of our app. connect is a function which selects,
@@ -66,12 +62,9 @@ App.propTypes = {
 //way to seperate your connect and your pure function.
 export default connect(
   (state) => ({
-    counters: state.app.counters
+    deliverPost: state.app.initialStatePost
   }),
   (dispatch) => ({
-    addNewCounter: () => dispatch(actions.newCounter()),
-    increment: (id) => dispatch(actions.increment(id)),
-    decrement: (id) => dispatch(actions.decrement(id)),
-    incrementWithDelay: (id) => dispatch(actions.incrementWithDelay(id))
+    editPost: (dispatchPost) => dispatch(actions.postActionName(dispatchPost)),
   })
 )(App)

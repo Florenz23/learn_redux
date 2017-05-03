@@ -6,8 +6,6 @@
 export const NAME = 'app'
 
 //action types
-export const INCREMENT = `${NAME}/INCREMENT`
-export const DECREMENT = `${NAME}/DECREMENT`
-export const ADD_NEW_COUNTER = `${NAME}/NEW`
+export const POST_TYPE_NAME = `${NAME}/NEWPOSTDESCRIPTION`
 
 //as you can see above, each action is namespaced with module's name.
