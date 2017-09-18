@@ -2,7 +2,7 @@ import { handleActions } from 'redux-actions'
 import { POST_TYPE_NAME } from './constants'
 
 const initialState = {
-  initialStatePost : "moin"
+  initialStatePost : "initialState"
 }
 
 export default handleActions({
