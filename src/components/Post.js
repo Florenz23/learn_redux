@@ -1,21 +1,21 @@
 import React, { PropTypes } from 'react'
 import { View,StyleSheet, TextInput } from 'react-native';
 
-
 const Post = (props) => {
-  const { children } = props
-  return (
-      <View
-          style={{height: 150, width:200}}
-          >
-          <TextInput
-            style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-            value={children}
-          />
-          </View>
-
-      )
+    const { children } = props
+    console.log(children)
+    return (
+      <View>
+        <TextInput
+          style={{height:88,borderWidth:1,width:100}}
+          value={children}
+        >
+        </TextInput>
+      </View>
+    )
 }
+
+
 
 Post.propTypes = {
   children: PropTypes.string.isRequired,
